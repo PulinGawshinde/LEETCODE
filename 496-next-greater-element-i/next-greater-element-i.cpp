@@ -2,14 +2,23 @@ class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         vector<int> answer;
+        vector<int> next(nums2.size());
+        stack<int> st;
+        int n=nums2.size();
+        for(int i=n-1;i>=0;i--){
+            while(st.size()>0&&nums2[i]>=st.top()){
+                st.pop();
+            }
+            if(st.empty()) next[i]=-1;
+            else next[i]=st.top();
+            st.push(nums2[i]);
+        }
+
         for(int i=0;i<nums1.size();i++){
-            int max=nums1[i];
-            for(int j=0;j<nums2.size();j++){
+            for(int j=0;j<n;j++){
                 if(nums1[i]==nums2[j]){
-                    int k=j;
-                    while(k+1<nums2.size()&&max>=nums2[k+1])k++;
-                    if(k+1<nums2.size()) answer.push_back(nums2[k+1]);
-                    else answer.push_back(-1);
+                 answer.push_back(next[j]);
+                 break;
                 }
             }
         }
