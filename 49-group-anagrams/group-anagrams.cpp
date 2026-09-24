@@ -4,7 +4,7 @@ public:
         unordered_map<string,int> mp ;
         vector<vector<string>> answer ; 
         int row=0;
-        
+
         for(int i = 0 ; i<strs.size(); i++){
             string s = strs[i];
             sort(s.begin(),s.end());
